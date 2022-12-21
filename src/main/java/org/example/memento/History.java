@@ -7,6 +7,7 @@ public class History {
     private List<EditorState> states = new ArrayList<>();
     public void push(EditorState state) {
         states.add(state);
+        System.out.println(states);
     }
 
     public EditorState pop() {

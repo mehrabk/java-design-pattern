@@ -18,4 +18,12 @@ public class EditorState {
     public String getFirstName() {
         return firstName;
     }
+
+    @Override
+    public String toString() {
+        return "EditorState{" +
+                "content='" + content + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
+    }
 }
