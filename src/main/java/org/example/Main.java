@@ -1,13 +1,18 @@
 package org.example;
 
+import org.example.iterator.BrowseHistory;
+import org.example.iterator.Iterator;
 import org.example.memento.Editor;
 import org.example.memento.History;
 import org.example.state.Canvas;
 import org.example.state.SelectionTool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        // memento demo
+        //================================================= memento demo
 //        Editor editor = new Editor();
 //        History history = new History();
 //
@@ -25,12 +30,25 @@ public class Main {
 //
 //        System.out.println(editor.toString());
 
-        //state demo
+        //================================================= state demo
         // we change behavior of canvas when change the state of tool (polymorphism & inherites & oop) => open(fo extend) closed(for modification) principal
-        Canvas canvas = new Canvas();
-        canvas.setCurrentTool(new SelectionTool());
-        canvas.mouseDown();
-        canvas.mouseUp();
+//        Canvas canvas = new Canvas();
+//        canvas.setCurrentTool(new SelectionTool());
+//        canvas.mouseDown();
+//        canvas.mouseUp();
+
+        //================================================= iterator
+        BrowseHistory history = new BrowseHistory();
+        history.push("mehrab1");
+        history.push("mehrab2");
+        history.push("mehrab3");
+        Iterator iterator = history.createIterator();
+
+        while(iterator.hasNext()) {
+            System.out.println(iterator.current());
+            iterator.next();
+        }
+
 
     }
 }
