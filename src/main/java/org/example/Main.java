@@ -6,6 +6,10 @@ import org.example.memento.Editor;
 import org.example.memento.History;
 import org.example.state.Canvas;
 import org.example.state.SelectionTool;
+import org.example.strategy.BlackAndWhiteFilter;
+import org.example.strategy.Compressor;
+import org.example.strategy.ImageStorage;
+import org.example.strategy.JpegCompressor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +42,20 @@ public class Main {
 //        canvas.mouseUp();
 
         //================================================= iterator
-        BrowseHistory history = new BrowseHistory();
-        history.push("mehrab1");
-        history.push("mehrab2");
-        history.push("mehrab3");
-        Iterator iterator = history.createIterator();
-
-        while(iterator.hasNext()) {
-            System.out.println(iterator.current());
-            iterator.next();
-        }
-
+//        BrowseHistory history = new BrowseHistory();
+//        history.push("mehrab1");
+//        history.push("mehrab2");
+//        history.push("mehrab3");
+//        Iterator iterator = history.createIterator();
+//
+//        while(iterator.hasNext()) {
+//            System.out.println(iterator.current());
+//            iterator.next();
+//        }
+//
+        //================================================= strategy
+        ImageStorage imageStorage = new ImageStorage();
+        imageStorage.store("myFileName", new JpegCompressor(), new BlackAndWhiteFilter());
 
     }
 }
