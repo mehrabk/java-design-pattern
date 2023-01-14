@@ -10,6 +10,8 @@ import org.example.strategy.BlackAndWhiteFilter;
 import org.example.strategy.Compressor;
 import org.example.strategy.ImageStorage;
 import org.example.strategy.JpegCompressor;
+import org.example.templateMethod.Task;
+import org.example.templateMethod.TransferMoneyTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +56,13 @@ public class Main {
 //        }
 //
         //================================================= strategy
-        ImageStorage imageStorage = new ImageStorage();
-        imageStorage.store("myFileName", new JpegCompressor(), new BlackAndWhiteFilter());
+//        ImageStorage imageStorage = new ImageStorage();
+//        imageStorage.store("myFileName", new JpegCompressor(), new BlackAndWhiteFilter());
+
+        //================================================= template method
+        //1- remove repetetive code 2- force follow structure
+        Task task = new TransferMoneyTask();
+        task.execute();
 
     }
 }
