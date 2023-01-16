@@ -1,9 +1,12 @@
 package org.example;
 
+import org.example.command.*;
+import org.example.command.editor.*;
+import org.example.command.fx.Button;
+import org.example.command.fx.Command;
 import org.example.iterator.BrowseHistory;
 import org.example.iterator.Iterator;
 import org.example.memento.Editor;
-import org.example.memento.History;
 import org.example.state.Canvas;
 import org.example.state.SelectionTool;
 import org.example.strategy.BlackAndWhiteFilter;
@@ -60,9 +63,38 @@ public class Main {
 //        imageStorage.store("myFileName", new JpegCompressor(), new BlackAndWhiteFilter());
 
         //================================================= template method
-        //1- remove repetetive code 2- force follow structure
-        Task task = new TransferMoneyTask();
-        task.execute();
+//        1- remove repetetive code 2- force follow structure
+//        Task task = new TransferMoneyTask();
+//        task.execute();
+        //================================================= Command
+        CustomerService service = new CustomerService();
+        Command command = new AddCustomerCommand(service);
+        Button button = new Button(command);
+        button.onClick();
 
+        // composite commands
+        CompositeCommand compositeCommand = new CompositeCommand();
+        compositeCommand.add(new ResizeCommand());
+        compositeCommand.add(new FilterCommand());
+        compositeCommand.execute();
+
+        // editor
+        History history = new History();
+        UndoCommand undo = new UndoCommand(history);
+        HtmlDocument document = new HtmlDocument();
+        document.setContent("mehrab");
+        document.setColor("red");
+
+        BoldCommand boldCommand = new BoldCommand(document, history);
+        boldCommand.execute();
+
+        ChangeColorCommand changeColorCommand = new ChangeColorCommand("blue", document, history);
+        changeColorCommand.execute();
+
+        System.out.println(document);
+
+        undo.execute();
+        undo.execute();
+        System.out.println(document);
     }
 }
