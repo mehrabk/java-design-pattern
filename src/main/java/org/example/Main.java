@@ -7,6 +7,7 @@ import org.example.command.fx.Command;
 import org.example.iterator.BrowseHistory;
 import org.example.iterator.Iterator;
 import org.example.memento.Editor;
+import org.example.observer.*;
 import org.example.state.Canvas;
 import org.example.state.SelectionTool;
 import org.example.strategy.BlackAndWhiteFilter;
@@ -67,34 +68,48 @@ public class Main {
 //        Task task = new TransferMoneyTask();
 //        task.execute();
         //================================================= Command
-        CustomerService service = new CustomerService();
-        Command command = new AddCustomerCommand(service);
-        Button button = new Button(command);
-        button.onClick();
+//        CustomerService service = new CustomerService();
+//        Command command = new AddCustomerCommand(service);
+//        Button button = new Button(command);
+//        button.onClick();
+//
+//        // composite commands
+//        CompositeCommand compositeCommand = new CompositeCommand();
+//        compositeCommand.add(new ResizeCommand());
+//        compositeCommand.add(new FilterCommand());
+//        compositeCommand.execute();
+//
+//        // editor
+//        History history = new History();
+//        UndoCommand undo = new UndoCommand(history);
+//        HtmlDocument document = new HtmlDocument();
+//        document.setContent("mehrab");
+//        document.setColor("red");
+//
+//        BoldCommand boldCommand = new BoldCommand(document, history);
+//        boldCommand.execute();
+//
+//        ChangeColorCommand changeColorCommand = new ChangeColorCommand("blue", document, history);
+//        changeColorCommand.execute();
+//
+//        System.out.println(document);
+//
+//        undo.execute();
+//        undo.execute();
+//        System.out.println(document);
+        //================================================= observer
+        // for notify other class when change state
+        // publisher
+        DataSource dataSource = new DataSource();
 
-        // composite commands
-        CompositeCommand compositeCommand = new CompositeCommand();
-        compositeCommand.add(new ResizeCommand());
-        compositeCommand.add(new FilterCommand());
-        compositeCommand.execute();
+        // subcriber
+        Observer subcriber1 = new Chart(dataSource);
+        Observer subcriber2 = new SpreadSheet(dataSource);
 
-        // editor
-        History history = new History();
-        UndoCommand undo = new UndoCommand(history);
-        HtmlDocument document = new HtmlDocument();
-        document.setContent("mehrab");
-        document.setColor("red");
+        dataSource.add(subcriber1);
+        dataSource.add(subcriber2);
 
-        BoldCommand boldCommand = new BoldCommand(document, history);
-        boldCommand.execute();
+        dataSource.setValue(12);
 
-        ChangeColorCommand changeColorCommand = new ChangeColorCommand("blue", document, history);
-        changeColorCommand.execute();
-
-        System.out.println(document);
-
-        undo.execute();
-        undo.execute();
-        System.out.println(document);
     }
 }
