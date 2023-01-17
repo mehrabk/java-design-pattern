@@ -8,6 +8,7 @@ public class DataSource extends Subject {
     }
 
     public void setValue(int value) {
+        // we can use push style -> pass the value in notifyObservers method
         this.value = value;
         notifyObservers();
     }

@@ -8,6 +8,7 @@ import org.example.iterator.BrowseHistory;
 import org.example.iterator.Iterator;
 import org.example.mediator.ArticlesDialogBox;
 import org.example.mediator.DialogBox;
+import org.example.mediator.observerWay.SinglePanelChartAnalytic;
 import org.example.memento.Editor;
 import org.example.observer.*;
 import org.example.state.Canvas;
@@ -116,5 +117,8 @@ public class Main {
         //================================================= mediator
         ArticlesDialogBox dialogBox = new ArticlesDialogBox();
         dialogBox.simulateUserInteraction();
+
+        SinglePanelChartAnalytic chart = new SinglePanelChartAnalytic();
+        chart.simulateUserInteraction();
     }
 }
