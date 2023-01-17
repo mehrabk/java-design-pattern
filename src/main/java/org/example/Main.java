@@ -6,6 +6,8 @@ import org.example.command.fx.Button;
 import org.example.command.fx.Command;
 import org.example.iterator.BrowseHistory;
 import org.example.iterator.Iterator;
+import org.example.mediator.ArticlesDialogBox;
+import org.example.mediator.DialogBox;
 import org.example.memento.Editor;
 import org.example.observer.*;
 import org.example.state.Canvas;
@@ -98,18 +100,21 @@ public class Main {
 //        undo.execute();
 //        System.out.println(document);
         //================================================= observer
-        // for notify other class when change state
-        // publisher
-        DataSource dataSource = new DataSource();
+//        // for notify other class when change state
+//        // publisher
+//        DataSource dataSource = new DataSource();
+//
+//        // subcriber
+//        Observer subcriber1 = new Chart(dataSource);
+//        Observer subcriber2 = new SpreadSheet(dataSource);
+//
+//        dataSource.add(subcriber1);
+//        dataSource.add(subcriber2);
+//
+//        dataSource.setValue(12);
 
-        // subcriber
-        Observer subcriber1 = new Chart(dataSource);
-        Observer subcriber2 = new SpreadSheet(dataSource);
-
-        dataSource.add(subcriber1);
-        dataSource.add(subcriber2);
-
-        dataSource.setValue(12);
-
+        //================================================= mediator
+        ArticlesDialogBox dialogBox = new ArticlesDialogBox();
+        dialogBox.simulateUserInteraction();
     }
 }
