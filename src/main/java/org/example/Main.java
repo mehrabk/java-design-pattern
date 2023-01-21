@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.chain.*;
 import org.example.command.*;
 import org.example.command.editor.*;
 import org.example.command.fx.Button;
@@ -14,7 +15,6 @@ import org.example.observer.*;
 import org.example.state.Canvas;
 import org.example.state.SelectionTool;
 import org.example.strategy.BlackAndWhiteFilter;
-import org.example.strategy.Compressor;
 import org.example.strategy.ImageStorage;
 import org.example.strategy.JpegCompressor;
 import org.example.templateMethod.Task;
@@ -115,10 +115,17 @@ public class Main {
 //        dataSource.setValue(12);
 
         //================================================= mediator
-        ArticlesDialogBox dialogBox = new ArticlesDialogBox();
-        dialogBox.simulateUserInteraction();
-
-        SinglePanelChartAnalytic chart = new SinglePanelChartAnalytic();
-        chart.simulateUserInteraction();
+//        ArticlesDialogBox dialogBox = new ArticlesDialogBox();
+//        dialogBox.simulateUserInteraction();
+//
+//        SinglePanelChartAnalytic chart = new SinglePanelChartAnalytic();
+//        chart.simulateUserInteraction();
+        //================================================= chain of responsibility
+        // athenticator -> looger -> compressor (pipeline)
+        Compressor compressor = new Compressor(null);
+        Logger logger = new Logger(compressor);
+        Authenticator authenticator = new Authenticator(logger);
+        WebServer server = new WebServer(authenticator);
+        server.handle(new HttpRequest("admin", "1234"));
     }
 }
