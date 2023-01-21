@@ -19,6 +19,8 @@ import org.example.strategy.ImageStorage;
 import org.example.strategy.JpegCompressor;
 import org.example.templateMethod.Task;
 import org.example.templateMethod.TransferMoneyTask;
+import org.example.visitor.*;
+import org.example.visitor.HtmlDocument;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,11 +123,17 @@ public class Main {
 //        SinglePanelChartAnalytic chart = new SinglePanelChartAnalytic();
 //        chart.simulateUserInteraction();
         //================================================= chain of responsibility
-        // athenticator -> looger -> compressor (pipeline)
-        Compressor compressor = new Compressor(null);
-        Logger logger = new Logger(compressor);
-        Authenticator authenticator = new Authenticator(logger);
-        WebServer server = new WebServer(authenticator);
-        server.handle(new HttpRequest("admin", "1234"));
+//        // athenticator -> looger -> compressor (pipeline)
+//        Compressor compressor = new Compressor(null);
+//        Logger logger = new Logger(compressor);
+//        Authenticator authenticator = new Authenticator(logger);
+//        WebServer server = new WebServer(authenticator);
+//        server.handle(new HttpRequest("admin", "1234"));
+        //================================================= visitor
+        HtmlDocument document = new HtmlDocument();
+        document.add(new AnchorNode());
+        document.add(new HeadingNode());
+//        document.execute(new HighlighOperation());
+        document.execute(new PlainTextOperation());
     }
 }
